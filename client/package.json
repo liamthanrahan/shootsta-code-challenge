@@ -1,7 +1,7 @@
 {
-  "name": "shootsta-code-challenge",
+  "name": "shootsta-code-challenge-client",
   "version": "1.0.0",
-  "description": "A code challenge I did for Shootsta",
+  "description": "Client for the code challenge I did for Shootsta",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode=development --hot",
@@ -20,6 +20,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@hot-loader/react-dom": "^16.13.0",
+    "apollo-upload-client": "^14.1.1",
     "bootstrap": "^4.5.2",
     "copy-webpack-plugin": "^6.0.3",
     "emotion": "^10.0.27",

@@ -1,0 +1,24 @@
+{
+  "name": "shootsta-code-challenge-api",
+  "version": "1.0.0",
+  "description": "API for the code challenge I did for Shootsta",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Liam Hanrahan",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.16.1",
+    "graphql": "^15.3.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.0"
+  }
+}
