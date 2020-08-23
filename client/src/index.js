@@ -4,7 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
 import getRoot from 'get-root'
 import { render } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import Home from './components/Home'
+import App from './components/App'
 
-render(<Home />, getRoot())
+render(
+  <Router>
+    <App />
+  </Router>,
+  getRoot()
+)

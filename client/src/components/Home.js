@@ -1,28 +1,31 @@
-import { hot } from 'react-hot-loader/root'
-
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Navbar from 'react-bootstrap/Navbar'
+import Card from 'react-bootstrap/Card'
 
-import List from './List'
-import Upload from './Upload'
+const exampleData = [
+  {
+    id: 1,
+    filename: 'Some file.mp4',
+    date: new Date(),
+  },
+]
 
 function Home() {
   return (
-    <Container>
-      <header>
-        <Navbar>
-          <Navbar.Brand>Video Hub</Navbar.Brand>
-        </Navbar>
-      </header>
-      <main>
-        <List />
-      </main>
-      <footer>
-        <Upload />
-      </footer>
-    </Container>
+    <>
+      <h1>Video list front-end goes here</h1>
+      {exampleData.map(video => (
+        <Card key={video.id}>
+          <Card.Body>
+            <Card.Img></Card.Img>
+            <Card.Title>{video.filename}</Card.Title>
+            <Card.Subtitle>
+              Uploaded on {video.date.toDateString()}
+            </Card.Subtitle>
+          </Card.Body>
+        </Card>
+      ))}
+    </>
   )
 }
 
-export default hot(Home)
+export default Home

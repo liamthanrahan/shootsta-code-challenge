@@ -33,6 +33,7 @@ export default () => {
     output: {
       filename: '[name].js',
       path: path.join(__dirname, 'dist'),
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -51,6 +52,7 @@ export default () => {
     },
     devServer: {
       open: true,
+      historyApiFallback: true,
     },
     plugins,
   }
