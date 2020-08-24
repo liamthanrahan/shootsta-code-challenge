@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { Container, Alert } from 'react-bootstrap'
 import { gql, useMutation, useApolloClient } from '@apollo/client'
 
-const UPLOAD_MUTATION = gql`
+export const UPLOAD_MUTATION = gql`
   mutation uploadVideo($file: Upload!) {
     uploadVideo(file: $file) {
       filename
@@ -11,7 +11,7 @@ const UPLOAD_MUTATION = gql`
   }
 `
 
-function Upload() {
+export function Upload() {
   const [uploadMessage, setUploadMesage] = useState('')
   const [uploadVideoMutation, { loading, error }] = useMutation(UPLOAD_MUTATION)
   const apolloClient = useApolloClient()
@@ -47,15 +47,19 @@ function Upload() {
 
   return (
     <Container>
+      <h2>Video upload</h2>
       <Form>
         <Form.File
           id="upload-video"
-          label="Upload Video"
+          label="Select a video to upload"
           required
           onChange={onChange}
           accept="video/mp4, video/webm, video/ogg"
+          data-testid="file-upload"
         />
-        <Alert variant={messageType}>{message}</Alert>
+        <Alert variant={messageType} data-testid="message">
+          {message}
+        </Alert>
       </Form>
     </Container>
   )

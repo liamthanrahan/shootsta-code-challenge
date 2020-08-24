@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { gql, useQuery } from '@apollo/client'
 import styled from '@emotion/styled'
 
-const GET_VIDEOS_QUERY = gql`
+export const GET_VIDEOS_QUERY = gql`
   query getVideos {
     videos {
       filename
@@ -18,7 +19,7 @@ const VideoList = styled.div`
   flex-direction: column;
 `
 
-function Home() {
+export function Home() {
   const { data: { videos = [] } = {} } = useQuery(GET_VIDEOS_QUERY)
 
   let videoContent = 'No video files were found.'
@@ -31,7 +32,10 @@ function Home() {
           </video>
         </Col>
         <Col>
-          <div>Name: {video.filename}</div>
+          <div>
+            Name:
+            {video.filename}
+          </div>
           <div>
             <a href={video.path}>Link</a>
           </div>
@@ -43,7 +47,7 @@ function Home() {
   return (
     <>
       <h2>Video list</h2>
-      <VideoList>{videoContent}</VideoList>
+      <VideoList data-testid="videos">{videoContent}</VideoList>
     </>
   )
 }
