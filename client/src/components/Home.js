@@ -1,6 +1,8 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { gql, useQuery } from '@apollo/client'
+import styled from '@emotion/styled'
 
 const GET_VIDEOS_QUERY = gql`
   query getVideos {
@@ -11,22 +13,37 @@ const GET_VIDEOS_QUERY = gql`
   }
 `
 
+const VideoList = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 function Home() {
   const { data: { videos = [] } = {} } = useQuery(GET_VIDEOS_QUERY)
-  console.log('videos', videos)
+
+  let videoContent = 'No video files were found.'
+  if (videos.length > 0) {
+    videoContent = videos.map(video => (
+      <Row key={video.filename}>
+        <Col>
+          <video controls>
+            <source src={video.path} />
+          </video>
+        </Col>
+        <Col>
+          <div>Name: {video.filename}</div>
+          <div>
+            <a href={video.path}>Link</a>
+          </div>
+        </Col>
+      </Row>
+    ))
+  }
+
   return (
     <>
-      <h1>Video list front-end goes here</h1>
-      {videos.map(video => (
-        <Card key={video.filename}>
-          <Card.Body>
-            <video controls>
-              <source src={video.path} />
-            </video>
-            <Card.Title>{video.filename}</Card.Title>
-          </Card.Body>
-        </Card>
-      ))}
+      <h2>Video list</h2>
+      <VideoList>{videoContent}</VideoList>
     </>
   )
 }

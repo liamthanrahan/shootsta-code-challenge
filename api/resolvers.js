@@ -1,35 +1,45 @@
-const { v4 } = require('uuid')
 const { createWriteStream, readdirSync, unlink } = require('fs')
 
-const VIDEO_DIR = './videos/'
+const VIDEO_DIR = './videos'
+const compatibleVideoFormatsRegex = new RegExp(/\.(mp4|webm|ogg)$/)
 
 const data = {
   videos() {
     const videos = readdirSync(VIDEO_DIR)
-    console.log('getVideos', videos, __dirname)
-    return videos.map(videoFile => ({
+
+    const trimmedVideos = videos.filter(file =>
+      file.match(compatibleVideoFormatsRegex)
+    )
+
+    return trimmedVideos.map(videoFile => ({
       filename: videoFile,
-      path: `${__dirname}${'\\videos\\'}${videoFile}`,
+      path: `http://localhost:4000/videos/${videoFile}`,
     }))
   },
   async uploadVideo({ file }) {
-    console.log('uploadVideo', file)
     const { createReadStream, filename } = await file
     const stream = createReadStream()
-    // const id = v4()
     const fileLocation = `${VIDEO_DIR}/${filename}`
 
-    await new Promise((resolve, reject) => {
-      const writeStream = createWriteStream(fileLocation)
-      writeStream.on('finish', resolve)
+    return await new Promise((resolve, reject) => {
+      if (!filename.match(compatibleVideoFormatsRegex)) {
+        reject(
+          new Error('Error: The uploaded file was not a valid video type.')
+        )
+      } else {
+        const writeStream = createWriteStream(fileLocation)
+        writeStream.on('finish', () =>
+          resolve({ filename, path: fileLocation })
+        )
 
-      writeStream.on('error', error => {
-        unlink(fileLocation, () => {
-          reject(error)
+        writeStream.on('error', error => {
+          unlink(fileLocation, () => {
+            reject(error)
+          })
         })
-      })
 
-      stream.pipe(writeStream)
+        stream.pipe(writeStream)
+      }
     })
   },
 }

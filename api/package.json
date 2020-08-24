@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.16.1",
-    "graphql": "^15.3.0",
-    "uuid": "^8.3.0"
+    "apollo-server-express": "^2.16.1",
+    "graphql": "^15.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

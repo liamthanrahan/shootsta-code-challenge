@@ -6,9 +6,14 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { LinkContainer } from 'react-router-bootstrap'
+import styled from '@emotion/styled'
 
 import Home from './Home'
 import Upload from './Upload'
+
+const StyledLinkContainer = styled(LinkContainer)`
+  cursor: pointer;
+`
 
 function App() {
   return (
@@ -21,9 +26,9 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end">
-              <LinkContainer to="/upload">
+              <StyledLinkContainer to="/upload">
                 <Nav.Item>Upload</Nav.Item>
-              </LinkContainer>
+              </StyledLinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
