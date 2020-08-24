@@ -2,10 +2,12 @@ const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
+const dataSource = require('./dataSource')
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  dataSources: () => ({ VideosAPI: dataSource }),
 })
 
 const app = express()
