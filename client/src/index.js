@@ -5,12 +5,21 @@ import React from 'react'
 import getRoot from 'get-root'
 import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { createUploadLink } from 'apollo-upload-client'
 
 import App from './components/App'
 
+const client = new ApolloClient({
+  link: createUploadLink({ uri: 'http://localhost:4000/graphql' }),
+  cache: new InMemoryCache(),
+})
+
 render(
   <Router>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </Router>,
   getRoot()
 )

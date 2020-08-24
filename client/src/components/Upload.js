@@ -1,12 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
-import { Container } from 'react-bootstrap'
+import { Container, Alert } from 'react-bootstrap'
+import { gql, useMutation, useApolloClient } from '@apollo/client'
+
+const UPLOAD_MUTATION = gql`
+  mutation uploadVideo($file: Upload!) {
+    uploadVideo(file: $file) {
+      filename
+    }
+  }
+`
 
 function Upload() {
+  const [uploadMessage, setUploadMesage] = useState('')
+  const [uploadVideoMutation, { loading, error }] = useMutation(UPLOAD_MUTATION)
+  const apolloClient = useApolloClient()
+
+  function onChange({
+    target: {
+      validity,
+      files: [file],
+    },
+  }) {
+    if (validity.valid) {
+      uploadVideoMutation({ variables: { file } }).then(({ data }) => {
+        apolloClient.resetStore()
+        setUploadMesage(
+          `Video file "${data.uploadVideo.filename}" was successfully uploaded!`
+        )
+      })
+    }
+  }
+
+  let message = ''
+  let messageType = ''
+  if (loading) {
+    message = 'File is being uploaded...'
+    messageType = 'info'
+  } else if (error) {
+    message = error.message
+    messageType = 'danger'
+  } else if (uploadMessage) {
+    message = uploadMessage
+    messageType = 'success'
+  }
+
   return (
     <Container>
       <Form>
-        <Form.File id="upload-video" label="Upload Video" />
+        <Form.File
+          id="upload-video"
+          label="Upload Video"
+          required
+          onChange={onChange}
+          accept="video/mp4, video/webm, video/ogg"
+        />
+        <Alert variant={messageType}>{message}</Alert>
       </Form>
     </Container>
   )
