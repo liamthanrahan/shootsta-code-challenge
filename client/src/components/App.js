@@ -8,8 +8,8 @@ import Nav from 'react-bootstrap/Nav'
 import { LinkContainer } from 'react-router-bootstrap'
 import styled from '@emotion/styled'
 
-import Home from './Home'
-import Upload from './Upload'
+import { Home } from './Home'
+import { Upload } from './Upload'
 
 const StyledLinkContainer = styled(LinkContainer)`
   cursor: pointer;
