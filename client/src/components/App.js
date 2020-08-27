@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav'
 import { LinkContainer } from 'react-router-bootstrap'
 import styled from '@emotion/styled'
 
+import { themes, ThemeContext } from './ThemeContext'
 import { Home } from './Home'
 import { Upload } from './Upload'
 
@@ -17,7 +18,7 @@ const StyledLinkContainer = styled(LinkContainer)`
 
 function App() {
   return (
-    <>
+    <ThemeContext.Provider value={themes.light}>
       <header>
         <Navbar bg="light">
           <Navbar.Brand>
@@ -41,7 +42,7 @@ function App() {
           </Switch>
         </main>
       </Container>
-    </>
+    </ThemeContext.Provider>
   )
 }
 

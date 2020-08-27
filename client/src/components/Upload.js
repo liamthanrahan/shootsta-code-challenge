@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import Form from 'react-bootstrap/Form'
 import { Container, Alert } from 'react-bootstrap'
 import { gql, useMutation, useApolloClient } from '@apollo/client'
@@ -11,10 +11,42 @@ export const UPLOAD_MUTATION = gql`
   }
 `
 
+const getUploadMessage = (loading, error, uploadMessage) => {
+  if (loading) {
+    return {
+      type: 'info',
+      text: 'File is being uploaded...',
+    }
+  }
+
+  if (error) {
+    return {
+      type: 'danger',
+      text: error.message,
+    }
+  }
+
+  if (uploadMessage) {
+    return {
+      type: 'success',
+      text: uploadMessage,
+    }
+  }
+
+  return {
+    type: '',
+    text: '',
+  }
+}
+
 export function Upload() {
   const [uploadMessage, setUploadMesage] = useState('')
   const [uploadVideoMutation, { loading, error }] = useMutation(UPLOAD_MUTATION)
   const apolloClient = useApolloClient()
+  const message = useMemo(
+    () => getUploadMessage(loading, error, uploadMessage),
+    [loading, error, uploadMessage]
+  )
 
   function onChange({
     target: {
@@ -32,19 +64,6 @@ export function Upload() {
     }
   }
 
-  let message = ''
-  let messageType = ''
-  if (loading) {
-    message = 'File is being uploaded...'
-    messageType = 'info'
-  } else if (error) {
-    message = error.message
-    messageType = 'danger'
-  } else if (uploadMessage) {
-    message = uploadMessage
-    messageType = 'success'
-  }
-
   return (
     <Container>
       <h2>Video upload</h2>
@@ -57,8 +76,8 @@ export function Upload() {
           accept="video/mp4, video/webm, video/ogg"
           data-testid="file-upload"
         />
-        <Alert variant={messageType} data-testid="message">
-          {message}
+        <Alert variant={message.type} data-testid="message">
+          {message.text}
         </Alert>
       </Form>
     </Container>
