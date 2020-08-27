@@ -50,15 +50,13 @@ const getListOfVideos = (videos, theme) => {
 export function Home() {
   const { data: { videos = [] } = {} } = useQuery(GET_VIDEOS_QUERY)
   const theme = useContext(ThemeContext)
-  const videoList = useMemo(() => getListOfVideos(videos, theme), [
-    videos,
-    theme,
-  ])
 
   return (
     <>
       <h2>Video list</h2>
-      <VideoList data-testid="videos">{videoList}</VideoList>
+      <VideoList data-testid="videos">
+        {getListOfVideos(videos, theme)}
+      </VideoList>
     </>
   )
 }

@@ -6,7 +6,15 @@
     "node": true,
     "jest/globals": true
   },
-  "plugins": ["babel", "jsx-a11y", "import", "react-hooks", "prettier", "jest"],
+  "plugins": [
+    "babel",
+    "jsx-a11y",
+    "import",
+    "react-hooks",
+    "prettier",
+    "jest",
+    "cypress"
+  ],
   "extends": [
     "airbnb",
     "jest-enzyme",
@@ -14,7 +22,8 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:jest/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
   ],
   "parser": "babel-eslint",
   "parserOptions": {

@@ -10,7 +10,8 @@
     "lint": "eslint --fix . && echo 'Lint complete.'",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "test": "jest --coverage",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "cypress:open": "cypress open"
   },
   "author": "Liam Hanrahan",
   "license": "ISC",
@@ -59,6 +60,7 @@
     "eslint-config-jest-enzyme": "^7.1.2",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
