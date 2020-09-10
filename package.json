@@ -1,0 +1,30 @@
+{
+  "name": "shootsta-code-challenge",
+  "version": "1.0.0",
+  "description": "Parent project for client and api including scripts to install dependencies, run locally, and execute tests.",
+  "main": "index.js",
+  "scripts": {
+    "install:api": "cd api && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm-run-all install:api install:client",
+    "start:api": "cd api && npm start",
+    "start:client": "cd client && npm start",
+    "start:all": "npm-run-all --parallel start:api start:client",
+    "test:api": "cd api && npm run test",
+    "test:client": "cd client && npm run test",
+    "test:all": "npm-run-all test:api test:client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liamthanrahan/shootsta-code-challenge.git"
+  },
+  "author": "liamthanrahan@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liamthanrahan/shootsta-code-challenge/issues"
+  },
+  "homepage": "https://github.com/liamthanrahan/shootsta-code-challenge#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

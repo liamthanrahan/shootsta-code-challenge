@@ -12,8 +12,8 @@ Code located in folder `api`
 
 ## Setup
 
-Run `npm install` in both the client and api directories.
+Run `npm install:all` to install dependencies for both folders.
 
-Start the API server first with the `npm start` command in the api folder
+Start `npm start:all` to run the code in both folders.
 
-In a separate terminal window run the client code with `npm start` command in the client folder
+Test `npm test:all` to execute the tests in both folders.
