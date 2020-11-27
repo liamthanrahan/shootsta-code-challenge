@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useContext, useMemo } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { gql, useQuery } from '@apollo/client'
 import styled from '@emotion/styled'
-import { ThemeContext } from './ThemeContext'
+import { ThemeContext } from '../ThemeContext'
+import '../../styles/index.scss'
 
 export const GET_VIDEOS_QUERY = gql`
   query getVideos {
@@ -17,19 +16,18 @@ export const GET_VIDEOS_QUERY = gql`
 
 const VideoList = styled.div`
   display: flex;
-  flex-direction: column;
 `
 
 const getListOfVideos = (videos, theme) => {
   if (videos.length > 0) {
     return videos.map(video => (
-      <Row key={video.filename}>
-        <Col>
+      <div className="video-row" key={video.filename}>
+        <div className="video-source">
           <video controls>
             <source src={video.path} />
           </video>
-        </Col>
-        <Col>
+        </div>
+        <div className="video-info">
           <div
             style={{ background: theme.background, color: theme.foreground }}
           >
@@ -39,8 +37,8 @@ const getListOfVideos = (videos, theme) => {
           <div>
             <a href={video.path}>Link</a>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     ))
   }
 
@@ -54,7 +52,7 @@ export function Home() {
   return (
     <>
       <h2>Video list</h2>
-      <VideoList data-testid="videos">
+      <VideoList className="video-list" data-testid="videos">
         {getListOfVideos(videos, theme)}
       </VideoList>
     </>

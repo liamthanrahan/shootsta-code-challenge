@@ -1,0 +1,43 @@
+$media-size-mobile: 480px;
+$media-size-tablet: 768px;
+$media-size-small: 1024px;
+$media-size-large: 1200px;
+
+html, body, #root {
+    height: 100%;
+}
+
+.video-list {
+    display: flex;
+
+    .video-row {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+
+        @media only screen and (max-width: $media-size-tablet) {
+            flex-direction: column;
+        }
+
+        .video-source {
+            display: flex;
+
+            video {
+                width: 100%;
+            }
+        }
+
+        .video-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-left: 10px;
+
+            @media only screen and (max-width: $media-size-tablet) {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+    
+        }
+    }
+}
